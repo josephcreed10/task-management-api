@@ -19,7 +19,7 @@ namespace TaskManagement_API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<string> CreateTask(string task)
+        public ActionResult<string> CreateTask([FromBody] string task)
         {
             return $"Created task: {task}";
         }
