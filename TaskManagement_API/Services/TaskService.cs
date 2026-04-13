@@ -1,53 +1,67 @@
 ﻿using AutoMapper;
 using TaskManagement_API.Entities;
+using TaskManagement_API.Repositories;
 using TaskManagement_API.IServices;
 using TaskManagement_API.Models.DTOs;
-using Microsoft.EntityFrameworkCore;
 
 namespace TaskManagement_API.Services
 {
-    public class TaskService: ITaskService
+    public class TaskService : ITaskService
     {
         private readonly IMapper _mapper;
-        private readonly ApplicationDbContext _dbContext;
-        public TaskService(IMapper mapper, ApplicationDbContext dbContext)
+        private readonly ITaskRepository _repository;
+
+        public TaskService(IMapper mapper, ITaskRepository repository)
         {
             _mapper = mapper;
-            _dbContext = dbContext;
+            _repository = repository;
         }
+
         public async Task<List<TaskReadDTO>> GetAllTasksAsync()
         {
-            var tasks = await _dbContext.Tasks.ToListAsync();
+            var tasks = await _repository.GetAllAsync();
             return _mapper.Map<List<TaskReadDTO>>(tasks);
         }
+
         public async Task<TaskReadDTO?> GetTaskByIdAsync(int id)
         {
-            var task = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+            var task = await _repository.GetByIdAsync(id);
+            if (task == null) return null;
+
             return _mapper.Map<TaskReadDTO>(task);
         }
+
         public async Task<TaskReadDTO> CreateTaskAsync(TaskCreateDTO taskCreateDTO)
         {
             var task = _mapper.Map<TaskItem>(taskCreateDTO);
-            await _dbContext.Tasks.AddAsync(task);
-            await _dbContext.SaveChangesAsync();
+
+            await _repository.AddAsync(task);
+            await _repository.SaveChangesAsync();
+
             return _mapper.Map<TaskReadDTO>(task);
         }
+
         public async Task<TaskReadDTO?> UpdateTaskByIdAsync(int id, TaskUpdateDTO taskUpdateDTO)
         {
-            var task = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+            var task = await _repository.GetByIdAsync(id);
+            if (task == null) return null;
+
             _mapper.Map(taskUpdateDTO, task);
-            await _dbContext.SaveChangesAsync();
+
+            await _repository.UpdateAsync(task);
+            await _repository.SaveChangesAsync();
+
             return _mapper.Map<TaskReadDTO>(task);
         }
+
         public async Task<bool> DeleteTaskByIdAsync(int id)
         {
-            var task = await _dbContext.Tasks.FirstOrDefaultAsync(x => x.Id == id);
-            if (task == null)
-            {
-                return false;
-            }
-            _dbContext.Tasks.Remove(task);
-            await _dbContext.SaveChangesAsync();
+            var task = await _repository.GetByIdAsync(id);
+            if (task == null) return false;
+
+            await _repository.DeleteAsync(task);
+            await _repository.SaveChangesAsync();
+
             return true;
         }
     }
