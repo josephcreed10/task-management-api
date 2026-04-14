@@ -44,8 +44,10 @@ namespace TaskManagement_API.Services
         public async Task<TaskReadDTO?> UpdateTaskByIdAsync(int id, TaskUpdateDTO taskUpdateDTO)
         {
             var task = await _repository.GetByIdAsync(id);
-            if (task == null) return null;
-
+            if (task == null)
+            {
+                return null;
+            }
             _mapper.Map(taskUpdateDTO, task);
 
             await _repository.UpdateAsync(task);
