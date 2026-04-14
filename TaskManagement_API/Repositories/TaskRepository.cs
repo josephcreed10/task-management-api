@@ -25,12 +25,12 @@ namespace TaskManagement_API.Repositories
             await _dbContext.Tasks.AddAsync(task);
         }
 
-        public async Task UpdateAsync(TaskItem task)
+        public void Update(TaskItem task)
         {
             _dbContext.Tasks.Update(task);
         }
 
-        public async Task DeleteAsync(TaskItem task)
+        public void Delete(TaskItem task)
         {
             _dbContext.Tasks.Remove(task);
         }

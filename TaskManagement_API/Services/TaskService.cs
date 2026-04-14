@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using TaskManagement_API.Entities;
 using TaskManagement_API.Repositories;
-using TaskManagement_API.IServices;
 using TaskManagement_API.Models.DTOs;
 
 namespace TaskManagement_API.Services
@@ -52,7 +51,7 @@ namespace TaskManagement_API.Services
             }
             _mapper.Map(taskUpdateDTO, task);
             task.UpdatedAt = DateTime.UtcNow;
-            await _repository.UpdateAsync(task);
+            _repository.Update(task);
             await _repository.SaveChangesAsync();
 
             return _mapper.Map<TaskReadDTO>(task);
@@ -63,7 +62,7 @@ namespace TaskManagement_API.Services
             var task = await _repository.GetByIdAsync(id);
             if (task == null) return false;
 
-            await _repository.DeleteAsync(task);
+            _repository.Delete(task);
             await _repository.SaveChangesAsync();
 
             return true;

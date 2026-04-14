@@ -1,6 +1,6 @@
 ﻿using TaskManagement_API.Models.DTOs;
 
-namespace TaskManagement_API.IServices
+namespace TaskManagement_API.Services
 {
     public interface ITaskService
     {
