@@ -3,10 +3,10 @@
 namespace TaskManagement_API.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum TaskPriorityEnum
+    public enum TaskStatus
     {
-        Low,
-        Medium,
-        High
+        Pending,
+        InProgress,
+        Completed
     }
 }

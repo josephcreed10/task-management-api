@@ -8,12 +8,10 @@ namespace TaskManagement_API.Models.DTOs
         [Required]
         public required string Title { get; set; }
         public string? Description { get; set; }
-        [Required]
-        [EnumValidation(typeof(TaskStatusEnum))]
-        public required TaskStatusEnum Status { get; set; }
-        [Required]
-        [EnumValidation(typeof(TaskPriorityEnum))]
-        public required TaskPriorityEnum Priority { get; set; }
+        [EnumValidation(typeof(Enums.TaskStatus))]
+        public required Enums.TaskStatus Status { get; set; }
+        [EnumValidation(typeof(TaskPriority))]
+        public required TaskPriority Priority { get; set; }
         public DateTime? DueDate { get; set; }
     }
 }

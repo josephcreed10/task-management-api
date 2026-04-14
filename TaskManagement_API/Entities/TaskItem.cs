@@ -10,9 +10,9 @@ namespace TaskManagement_API.Entities
         public required string Title { get; set; }
         public string? Description { get; set; }
         [Required]
-        public required TaskStatusEnum Status { get; set; }
+        public required Enums.TaskStatus Status { get; set; }
         [Required]
-        public required TaskPriorityEnum Priority { get; set; }
+        public required TaskPriority Priority { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
