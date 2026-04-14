@@ -10,7 +10,7 @@ namespace TaskManagement_API.Models.DTOs
         public required TaskStatusEnum Status { get; set; }
         public required TaskPriorityEnum Priority { get; set; }
         public DateTime? DueDate { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
