@@ -34,6 +34,8 @@ namespace TaskManagement_API.Services
         public async Task<TaskReadDTO> CreateTaskAsync(TaskCreateDTO taskCreateDTO)
         {
             var task = _mapper.Map<TaskItem>(taskCreateDTO);
+            task.CreatedAt = DateTime.UtcNow;
+            task.UpdatedAt = DateTime.UtcNow;
 
             await _repository.AddAsync(task);
             await _repository.SaveChangesAsync();
@@ -49,7 +51,7 @@ namespace TaskManagement_API.Services
                 return null;
             }
             _mapper.Map(taskUpdateDTO, task);
-
+            task.UpdatedAt = DateTime.UtcNow;
             await _repository.UpdateAsync(task);
             await _repository.SaveChangesAsync();
 
