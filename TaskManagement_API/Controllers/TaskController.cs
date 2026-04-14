@@ -94,16 +94,24 @@ namespace TaskManagement_API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteTask([FromRoute] int id)
         {
-            if (id <= 0)
+            try
             {
-                return BadRequest(ApiResponse<object>.BadRequest("Enter valid id."));
+                if (id <= 0)
+                {
+                    return BadRequest(ApiResponse<object>.BadRequest("Enter valid id."));
+                }
+                var deleteStatus = await _taskService.DeleteTaskByIdAsync(id);
+                if (!deleteStatus)
+                {
+                    return NotFound(ApiResponse<object>.NotFound($"Task with id:{id} not found."));
+                }
+                return NoContent();
+
             }
-            var deleteStatus = await _taskService.DeleteTaskByIdAsync(id);
-            if (!deleteStatus)
+            catch (Exception ex)
             {
-                return NotFound(ApiResponse<object>.NotFound($"Task with id:{id} not found."));
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
-            return NoContent();
         }
     }
 }
