@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using TaskManagement_API.Entities;
-using TaskManagement_API.IServices;
 using TaskManagement_API.Profiles;
 using TaskManagement_API.Repositories;
 using TaskManagement_API.Services;

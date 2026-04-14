@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManagement_API.IServices;
 using TaskManagement_API.Models.ApiResponse;
 using TaskManagement_API.Models.DTOs;
+using TaskManagement_API.Services;
 
 namespace TaskManagement_API.Controllers
 {
