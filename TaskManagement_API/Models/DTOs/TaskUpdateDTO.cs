@@ -1,4 +1,4 @@
-﻿using TaskManagement_API.Custom_Validation;
+﻿using TaskManagement_API.CustomValidation;
 using TaskManagement_API.Enums;
 
 namespace TaskManagement_API.Models.DTOs
@@ -7,10 +7,10 @@ namespace TaskManagement_API.Models.DTOs
     {
         public required string Title { get; set; }
         public string? Description { get; set; }
-        [EnumValidation(typeof(Enums.TaskStatus))]
-        public required Enums.TaskStatus Status { get; set; }
-        [EnumValidation(typeof(TaskPriority))]
-        public required TaskPriority Priority { get; set; }
+        [EnumValidation(typeof(TaskItemStatus))]
+        public required TaskItemStatus Status { get; set; }
+        [EnumValidation(typeof(TaskItemPriority))]
+        public required TaskItemPriority Priority { get; set; }
         public DateTime? DueDate { get; set; }
     }
 }

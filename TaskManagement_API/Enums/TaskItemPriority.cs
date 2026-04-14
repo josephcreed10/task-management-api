@@ -3,7 +3,7 @@
 namespace TaskManagement_API.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum TaskPriority
+    public enum TaskItemPriority
     {
         Low,
         Medium,

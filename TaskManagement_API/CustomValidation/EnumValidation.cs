@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TaskManagement_API.Custom_Validation
+namespace TaskManagement_API.CustomValidation
 {
     public class EnumValidation: ValidationAttribute
     {
